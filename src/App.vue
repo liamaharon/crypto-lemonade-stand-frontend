@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <navbar v-bind:loggedIn="true"></navbar>
-    <router-view></router-view>
+    <div class="app-wrapper">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -23,5 +25,11 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 70vw;
 }
 </style>

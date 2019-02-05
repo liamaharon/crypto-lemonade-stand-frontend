@@ -14,10 +14,16 @@ export default new Router({
       component: Home
     },
     {
+      path: "/signup",
+      name: "signup",
+      component: () =>
+        import(/* webpackChunkName: "signup" */ "./views/Signup.vue")
+    },
+    {
       path: "/**",
       name: "404",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/NotFound.vue")
+        import(/* webpackChunkName: "not-found" */ "./views/NotFound.vue")
     }
   ]
 });
