@@ -18,7 +18,8 @@
       <div class="control has-icons-left has-icons-right">
         <input
           class="input"
-          v-bind:class="{'is-danger': !emailIsValid}"
+          v-bind:class="{'is-danger': showEmailError}"
+          v-on:blur="onEmailBlur()"
           type="email"
           placeholder="juicy@fruits.com"
           v-model="email"
@@ -27,10 +28,10 @@
           <i class="fas fa-envelope"></i>
         </span>
         <span class="icon is-small is-right">
-          <i v-bind:class="{'fa-exclamation-triangle': !emailIsValid}" class="fas"></i>
+          <i v-bind:class="{'fa-exclamation-triangle': showEmailError}" class="fas"></i>
         </span>
       </div>
-      <p v-if="!emailIsValid" class="help is-danger">Please enter a valid email address</p>
+      <p v-if="showEmailError" class="help is-danger">Please enter a valid email address</p>
     </div>
 
     <div class="field">
@@ -69,12 +70,21 @@ export default {
     lastName: "",
     email: "",
     password: "",
-    phoneNumber: ""
+    phoneNumber: "",
+    emailTouched: false
   }),
+  methods: {
+    onEmailBlur() {
+      this.emailTouched = true;
+    }
+  },
   computed: {
     emailIsValid: function() {
       const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return regex.test(this.email);
+    },
+    showEmailError: function() {
+      return !this.emailIsValid && this.emailTouched;
     },
     formIsValid: function() {
       return (
@@ -90,9 +100,15 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  margin-top: 5rem;
+}
 .field {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.control {
+  width: 100%;
 }
 </style>
