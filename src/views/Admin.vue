@@ -12,6 +12,7 @@
           class="order"
           :ticker="order.product.ticker"
           :qty="order.qty"
+          :account-id="order.accountId"
           :status="order.status"
           :payout-address="order.address"
         />

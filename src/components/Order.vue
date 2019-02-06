@@ -7,6 +7,9 @@
       Amount: {{ qty }}
     </span>
     <span>
+      Customer ID: {{ accountId }}
+    </span>
+    <span>
       Payout address: {{ payoutAddress }}
     </span>
     <span>
@@ -23,6 +26,7 @@ export default {
     status: String,
     qty: String,
     payoutAddress: String,
+    accountId: Number
   }
 };
 </script>
