@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box wrapper">
     <span>
       Symbol: {{ ticker }}
     </span> 
@@ -28,10 +28,7 @@ export default {
 </script>
 
 <style scoped>
-.loggedinas {
-  margin-right: 1rem;
-}
-.box {
+.wrapper {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
