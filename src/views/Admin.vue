@@ -11,6 +11,7 @@ export default {
   name: "Admin",
   created: function() {
     this.$store.dispatch("fetchOrders");
+    this.$store.dispatch("fetchProducts");
   }
 };
 </script>
