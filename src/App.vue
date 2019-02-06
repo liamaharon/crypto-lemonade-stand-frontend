@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <navbar v-bind:loggedIn="true"></navbar>
+    <navbar />
     <div class="app-wrapper">
-      <router-view></router-view>
+      <router-view />
     </div>
   </div>
 </template>
@@ -11,7 +11,7 @@
 import Navbar from "@/components/Navbar.vue";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     Navbar
   }

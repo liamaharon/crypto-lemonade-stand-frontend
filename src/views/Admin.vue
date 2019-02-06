@@ -1,12 +1,14 @@
 <template>
   <div>
-    <h1 class="is-size-1">Admin</h1>
+    <h1 class="is-size-1">
+      Admin
+    </h1>
   </div>
 </template>
 
 <script>
 export default {
-  name: "admin",
+  name: "Admin",
   created: function() {
     this.$store.dispatch("fetchOrders");
   }

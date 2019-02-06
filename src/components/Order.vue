@@ -1,10 +1,12 @@
 <template>
-  <div class="box">Order</div>
+  <div class="box">
+    Order
+  </div>
 </template>
 
 <script>
 export default {
-  name: "order",
+  name: "Order",
   props: {
     ticker: String,
     name: String,
