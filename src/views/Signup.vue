@@ -56,9 +56,22 @@
 
     <div class="field is-grouped">
       <div class="control">
-        <button v-bind:disabled="!formIsValid" class="button is-link">Signup</button>
+        <button
+          v-on:click="onClickSignup()"
+          v-bind:disabled="!formIsValid"
+          class="button is-link"
+          v-bind:class="{'is-loading': signingUp}"
+        >Signup</button>
       </div>
     </div>
+    <article v-if="signupError" class="message is-danger">
+      <div
+        class="message-body"
+      >There was a problem registering your account. Please try again later.
+        <br>
+        <span class="signup-error-msg">{{signupError}}</span>
+      </div>
+    </article>
   </div>
 </template>
 
@@ -76,6 +89,15 @@ export default {
   methods: {
     onEmailBlur() {
       this.emailTouched = true;
+    },
+    onClickSignup() {
+      this.$store.dispatch("signUp", {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password,
+        phoneNumber: this.phoneNumber
+      });
     }
   },
   computed: {
@@ -94,6 +116,12 @@ export default {
         this.phoneNumber.length > 0 &&
         this.emailIsValid
       );
+    },
+    signupError: function() {
+      return this.$store.state.signup.signupError;
+    },
+    signingUp: function() {
+      return this.$store.state.signup.signingUp;
     }
   }
 };
@@ -102,6 +130,7 @@ export default {
 <style scoped>
 .wrapper {
   margin-top: 5rem;
+  max-width: 30rem;
 }
 .field {
   display: flex;
@@ -110,5 +139,11 @@ export default {
 }
 .control {
   width: 100%;
+}
+.message-body {
+  text-align: left;
+}
+.signup-error-msg {
+  font-size: 12px;
 }
 </style>

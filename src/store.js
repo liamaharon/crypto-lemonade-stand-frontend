@@ -1,5 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import request from "./utils/request";
+import router from './router';
+import { pathToFileURL } from "url";
 
 Vue.use(Vuex);
 
@@ -22,11 +25,12 @@ const moduleSignup = {
     }
   },
   actions: {
-    signUp({ commit }) {
+    async signUp({ commit }, data) {
       commit('initSignup');
       try {
-        // TODO make request
+        await request('post', '/accounts', data);
         commit('signupSuccess');
+        router.push('login&signup-success=true');
       } catch (err) {
         commit('signupFailed', err.message);
       }
