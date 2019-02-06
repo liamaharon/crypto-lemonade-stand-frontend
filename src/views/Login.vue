@@ -69,6 +69,14 @@
       </div>
     </article>
     <article
+      v-if="forbiddenMsg"
+      class="message is-danger"
+    >
+      <div class="message-body">
+        There was a problem authenticating with the server, please login again.
+      </div>
+    </article>
+    <article
       v-if="!!signupEmail"
       class="message is-success"
     >
@@ -91,6 +99,9 @@ export default {
   computed: {
     signupEmail: function() {
       return this.$route.query.signupEmail;
+    },
+    forbiddenMsg: function() {
+      return this.$route.query.forbiddenMsg;
     },
     emailIsValid: function() {
       return validEmailRegex.test(this.email);

@@ -5,7 +5,11 @@ export default {
   state: {
     loggingIn: false,
     loginError: null,
-    loggedInUser: null
+    loggedInUser: {
+      email: null,
+      authToken: null,
+      id: null
+    }
   },
   mutations: {
     initLogin(state) {
@@ -19,10 +23,18 @@ export default {
     loginFailed(state, err) {
       state.loggingIn = false;
       state.loginError = err;
-      state.loggedInUser = null;
+      state.loggedInUser = {
+        email: null,
+        authToken: null,
+        id: null
+      };
     },
     logout(state) {
-      state.loggedInUser = null;
+      state.loggedInUser = {
+        email: null,
+        authToken: null,
+        id: null
+      };
     }
   },
   actions: {

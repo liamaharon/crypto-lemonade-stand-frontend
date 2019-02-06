@@ -3,6 +3,18 @@
     <h1 class="is-size-1">
       All Orders
     </h1>
+    <article
+      v-if="ordersError"
+      class="message is-danger"
+    >
+      <div class="message-body">
+        There was a problem fetching the orders.
+        <br>
+        <span class="login-error-msg">
+          {{ ordersError }}
+        </span>
+      </div>
+    </article>
     <div>
       <div
         v-for="order in ordersWithProduct"
@@ -37,6 +49,9 @@ export default {
     },
     ordersUpdating: function() {
       return this.$store.state.orders.ordersUpdating;
+    },
+    ordersError: function() {
+      return this.$store.state.orders.error;
     },
   },
   created: function() {

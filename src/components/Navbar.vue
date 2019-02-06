@@ -7,7 +7,7 @@
       Home
     </router-link>
     <div
-      v-if="!!loggedInUser"
+      v-if="!!loggedInUser.authToken"
       class="left-margin"
     >
       <span class="email">
