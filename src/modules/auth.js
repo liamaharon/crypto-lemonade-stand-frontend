@@ -13,23 +13,25 @@ export default {
     },
     loginSuccess(state, user) {
       state.loggingIn = false;
-      state.loginError = null
+      state.loginError = null;
       state.loggedInUser = user;
     },
     loginFailed(state, err) {
       state.loggingIn = false;
-      state.loginError = err
+      state.loginError = err;
       state.loggedInUser = null;
     },
     logout(state) {
-      state.loggedInUser = null
+      state.loggedInUser = null;
     }
   },
   actions: {
     async login({ commit }, payload) {
       commit('initLogin');
       try {
-        const { data } = await request('post', '/accounts/login', payload);
+        const method = 'post';
+        const path = '/accounts/login';
+        const { data } = await request({ method, path, data: payload });
         const { userId, id } = data;
         const user = {
           email: payload.email,
@@ -41,7 +43,7 @@ export default {
       } catch (err) {
         let errMsg = err.message;
         if (err.message.includes('401')) {
-          errMsg = "Invalid email or password"
+          errMsg = "Invalid email or password";
         }
         commit('loginFailed', errMsg);
       }
@@ -51,11 +53,12 @@ export default {
       commit('logout');
       router.push('/');
       try {
-        const path = `/accounts/logout?access_token=${token}`
-        await request('post', path);
+        const method = 'post';
+        const path = '/accounts/logout';
+        await request({ method, path, token });
       } catch (err) {
-        console.error('Error logging out on server: ', err)
+        console.error('Error logging out on server: ', err);
       }
     }
   }
-}
+};

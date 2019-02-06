@@ -12,18 +12,20 @@ export default {
     },
     signupSuccess(state) {
       state.signingUp = false;
-      state.signupError = null
+      state.signupError = null;
     },
     signupFailed(state, err) {
       state.signingUp = false;
-      state.signupError = err
+      state.signupError = err;
     }
   },
   actions: {
     async signUp({ commit }, data) {
       commit('initSignup');
       try {
-        await request('post', '/accounts', data);
+        const method = 'post';
+        const path = '/accounts';
+        await request({ method, path, data });
         commit('signupSuccess');
         router.push(`login?signupEmail=${data.email}`);
       } catch (err) {
@@ -31,4 +33,4 @@ export default {
       }
     }
   }
-}
+};
