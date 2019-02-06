@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="is-size-1">
-      All orders
+      All Orders
     </h1>
     <div>
       <div
@@ -15,6 +15,8 @@
           :account-id="order.accountId"
           :status="order.status"
           :payout-address="order.address"
+          :update-order="() => updateOrder(order.id)"
+          :updating="ordersUpdating[order.id] || false"
         />
       </div>
     </div>
@@ -32,11 +34,23 @@ export default {
   computed: {
     ordersWithProduct: function() {
       return this.$store.getters.ordersWithProduct;
-    }
+    },
+    ordersUpdating: function() {
+      return this.$store.state.orders.ordersUpdating;
+    },
   },
   created: function() {
     this.$store.dispatch("fetchOrders");
     this.$store.dispatch("fetchProducts");
+  },
+  methods: {
+    updateOrder: function(orderId) {
+        const order = this.$store.state.orders.data.find(order => order.id === orderId);
+        const newOrder = {...order};
+        if (order.status === 'PENDING_PAYMENT') newOrder.status = 'PENDING_FULFILMENT';
+        if (order.status === 'PENDING_FULFILMENT') newOrder.status = 'COMPLETED';
+        this.$store.dispatch('updateOrder', {orderId, newOrder});
+    }
   }
 };
 </script>

@@ -15,6 +15,14 @@
     <span>
       Status: {{ status }}
     </span>
+    <button
+      v-if="updateBtnText"
+      class="button is-primary"
+      :class="{'is-loading': updating}"
+      @click="updateOrder"
+    >
+      {{ updateBtnText }} 
+    </button>
   </div>
 </template>
 
@@ -26,7 +34,16 @@ export default {
     status: String,
     qty: Number,
     payoutAddress: String,
-    accountId: Number
+    accountId: Number,
+    updateOrder: Function,
+    updating: Boolean
+  },
+  computed: {
+    updateBtnText: function() {
+      if (this.status === 'PENDING_PAYMENT') return 'Mark paid'; 
+      if (this.status === 'PENDING_FULFILMENT') return 'Mark fulfilled'; 
+      return null;
+    }
   }
 };
 </script>
