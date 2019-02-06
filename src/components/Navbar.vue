@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: "navbar",
   methods: {
     onClickLogout: function() {
       this.$store.dispatch("logout");
