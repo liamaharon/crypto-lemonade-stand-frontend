@@ -54,8 +54,8 @@ import { validEmailRegex } from "../utils/regex";
 export default {
   name: "login",
   data: () => ({
-    email: "",
-    password: "",
+    email: "admin@email.com",
+    password: "admin",
     emailTouched: false
   }),
   methods: {
@@ -83,10 +83,10 @@ export default {
       return this.password.length > 0 && this.emailIsValid;
     },
     loginError: function() {
-      return this.$store.state.login.loginError;
+      return this.$store.state.auth.loginError;
     },
     loggingIn: function() {
-      return this.$store.state.login.loggingIn;
+      return this.$store.state.auth.loggingIn;
     }
   }
 };

@@ -1,12 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import {
-  login,
+  auth,
   signup
 } from './modules';
-import request from "./utils/request";
-import router from './router';
-import { pathToFileURL } from "url";
 
 Vue.use(Vuex);
 
@@ -16,7 +13,7 @@ export default new Vuex.Store({
   actions: {},
   modules: {
     signup,
-    login,
+    auth,
   },
   strict: true,
 });

@@ -1,7 +1,7 @@
-import login from './login';
+import auth from './auth';
 import signup from './signup';
 
 export {
-  login,
+  auth,
   signup
 }
