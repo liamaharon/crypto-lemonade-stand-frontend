@@ -25,7 +25,7 @@ export default {
       try {
         await request('post', '/accounts', data);
         commit('signupSuccess');
-        router.push('login?fromSignup=true');
+        router.push(`login?signupEmail=${data.email}`);
       } catch (err) {
         commit('signupFailed', err.message);
       }

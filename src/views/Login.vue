@@ -38,9 +38,14 @@
       </div>
     </div>
     <article v-if="loginError" class="message is-danger">
-      <div
-        class="message-body"
-      >There was a problem registering your account. Please try again later.
+      <div class="message-body">There was a problem logging in.
+        <br>
+        <span class="login-error-msg">{{loginError}}</span>
+      </div>
+    </article>
+    <article v-if="!!signupEmail" class="message is-success">
+      <div class="message-body">
+        Account {{signupEmail}} created successfully! Please login.
         <br>
         <span class="login-error-msg">{{loginError}}</span>
       </div>
@@ -69,6 +74,9 @@ export default {
     }
   },
   computed: {
+    signupEmail: function() {
+      return this.$route.query.signupEmail;
+    },
     emailIsValid: function() {
       return validEmailRegex.test(this.email);
     },
