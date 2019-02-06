@@ -1,6 +1,17 @@
 <template>
   <div class="box">
-    Order
+    <span>
+      Symbol: {{ ticker }}
+    </span> 
+    <span>
+      Amount: {{ qty }}
+    </span>
+    <span>
+      Payout address: {{ payoutAddress }}
+    </span>
+    <span>
+      Status: {{ status }}
+    </span>
   </div>
 </template>
 
@@ -9,26 +20,20 @@ export default {
   name: "Order",
   props: {
     ticker: String,
-    name: String,
     status: String,
     qty: String,
-    customerEmail: String,
-    timeCreated: Number
+    payoutAddress: String,
   }
 };
 </script>
 
 <style scoped>
-.wrapper {
-  margin: 1rem;
-  display: flex;
-}
-.left-margin {
-  display: flex;
-  align-items: baseline;
-  margin-left: auto;
-}
 .loggedinas {
   margin-right: 1rem;
+}
+.box {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
 }
 </style>

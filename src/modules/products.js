@@ -21,7 +21,7 @@ export default {
     fetchProductsFailed(state, err) {
       state.loading = false;
       state.error = err;
-      state.data = null;
+      state.data = {};
     }
   },
   actions: {

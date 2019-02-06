@@ -19,7 +19,7 @@ export default {
     fetchOrdersFailed(state, err) {
       state.loading = false;
       state.error = err;
-      state.data = null;
+      state.data = [];
     }
   },
   actions: {
@@ -35,5 +35,16 @@ export default {
         commit('fetchOrdersFailed', err);
       }
     }
-  }
+  },
+  getters: {
+    ordersWithProduct: function (state, getters, rootState) {
+      const orders = state.data;
+      const products = rootState.products.data;
+      const ordersWithProduct = orders.map((order) => {
+        const product = products[order.productId] || 'loading';
+        return { ...order, product };
+      });
+      return ordersWithProduct;
+    }
+  },
 };
