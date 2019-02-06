@@ -10,9 +10,15 @@
       v-if="!!loggedInUser"
       class="left-margin"
     >
-      <span class="loggedinas">
+      <span class="email">
         Logged in: {{ loggedInUser.email }}
       </span>
+      <button
+        class="button is-primary"
+        @click="onClickAllOrders()"
+      >
+        Admin
+      </button>
       <button
         class="button"
         @click="onClickLogout()"
@@ -34,6 +40,9 @@ export default {
   methods: {
     onClickLogout: function() {
       this.$store.dispatch("logout");
+    },
+    onClickAllOrders: function() {
+      this.$router.push('/admin');
     }
   }
 };
@@ -49,7 +58,7 @@ export default {
   align-items: baseline;
   margin-left: auto;
 }
-.loggedinas {
+.email, .is-primary {
   margin-right: 1rem;
 }
 </style>
