@@ -50,6 +50,7 @@ export default {
           authToken: id,
           id: userId
         };
+        window.localStorage.setItem('user', JSON.stringify(user));
         commit('loginSuccess', user);
         router.push('/admin');
       } catch (err) {
@@ -62,6 +63,7 @@ export default {
     },
     async logout({ commit, state }) {
       const token = state.loggedInUser.authToken;
+      window.localStorage.removeItem('user');
       commit('logout');
       router.push('/');
       try {
@@ -70,6 +72,12 @@ export default {
         await request({ method, path, token });
       } catch (err) {
         console.error('Error logging out on server: ', err);
+      }
+    },
+    async recoverUserState({commit}) {
+      const user = JSON.parse(window.localStorage.getItem('user'));
+      if (user.email) {
+        commit('loginSuccess', user);
       }
     }
   }
