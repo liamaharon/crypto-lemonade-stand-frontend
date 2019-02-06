@@ -44,11 +44,7 @@
       </div>
     </article>
     <article v-if="!!signupEmail" class="message is-success">
-      <div class="message-body">
-        Account {{signupEmail}} created successfully! Please login.
-        <br>
-        <span class="login-error-msg">{{loginError}}</span>
-      </div>
+      <div class="message-body">Account {{signupEmail}} created successfully! Please login.</div>
     </article>
   </div>
 </template>

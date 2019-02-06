@@ -26,7 +26,11 @@ export default {
         await request('post', '/accounts/login', data);
         commit('loginSuccess');
       } catch (err) {
-        commit('loginFailed', err.message);
+        let errMsg = err.message;
+        if (err.message.includes('401')) {
+          errMsg = "Invalid email or password"
+        }
+        commit('loginFailed', errMsg);
       }
     }
   }
