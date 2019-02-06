@@ -1,4 +1,5 @@
 import request from '../utils/request';
+import router from '../router';
 
 export default {
   state: {
@@ -24,7 +25,7 @@ export default {
       try {
         await request('post', '/accounts', data);
         commit('signupSuccess');
-        router.push('login?signup-success=true');
+        router.push('login?fromSignup=true');
       } catch (err) {
         commit('signupFailed', err.message);
       }
