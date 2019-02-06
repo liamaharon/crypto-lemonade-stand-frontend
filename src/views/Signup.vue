@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import { validEmailRegex } from "../utils/regex.js";
 export default {
   name: "signup",
   data: () => ({
@@ -102,8 +103,7 @@ export default {
   },
   computed: {
     emailIsValid: function() {
-      const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return regex.test(this.email);
+      return validEmailRegex.test(this.email);
     },
     showEmailError: function() {
       return !this.emailIsValid && this.emailTouched;
