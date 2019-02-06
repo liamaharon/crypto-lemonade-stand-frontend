@@ -1,5 +1,5 @@
 <template>
-  <all-orders
+  <admin-orders
     :orders-with-product="ordersWithProduct"
     :update-order="updateOrder"
     :orders-error="ordersError"
@@ -8,12 +8,12 @@
 </template>
 
 <script>
-import AllOrders from '@/components/AllOrders';
+import AdminOrders from '@/components/AdminOrders';
 
 export default {
   name: "Admin",
   components: {
-    AllOrders
+    AdminOrders
   },
   computed: {
     ordersWithProduct: function() {
