@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: "admin"
+  name: "admin",
+  created: function() {
+    this.$store.dispatch("fetchOrders");
+  }
 };
 </script>
 
