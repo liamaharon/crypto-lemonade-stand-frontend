@@ -39,7 +39,7 @@
 import Order from '@/components/Order';
 
 export default {
-  name: "AdminOrders",
+  name: "OrdersAdmin",
   components: {
     Order
   },
