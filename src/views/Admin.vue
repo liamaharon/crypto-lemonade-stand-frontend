@@ -10,7 +10,7 @@
       >
         <order 
           class="order"
-          :ticker="order.product.ticker"
+          :ticker="order.product.ticker || 'Loading...'"
           :qty="order.qty"
           :account-id="order.accountId"
           :status="order.status"

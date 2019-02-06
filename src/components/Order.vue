@@ -24,7 +24,7 @@ export default {
   props: {
     ticker: String,
     status: String,
-    qty: String,
+    qty: Number,
     payoutAddress: String,
     accountId: Number
   }
