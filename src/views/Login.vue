@@ -92,7 +92,7 @@ import { validEmailRegex } from "../utils/regex";
 export default {
   name: "Login",
   data: () => ({
-    email: "user@email.com",
+    email: "admin@email.com",
     password: "pass",
     emailTouched: false
   }),
