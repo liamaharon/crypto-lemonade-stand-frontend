@@ -3,14 +3,18 @@ import router from '../router';
 
 const DEFAULT_ROOT = 'http://localhost:3000/api';
 const UNAUTHORIZED = 401;
+
+// redirect user to login on 401
 axios.interceptors.response.use(
   response => response,
   error => {
-    const { status } = error.response;
-    if (status === UNAUTHORIZED) {
-      router.push('/login?forbiddenMsg=true');
+    if (error.response) {
+      const { status } = error.response;
+      if (status === UNAUTHORIZED) {
+        router.push('/login?forbiddenMsg=true');
+      }
     }
-    return Promise.reject(error);
+    return Promise.reject(error.message);
   }
 );
 
