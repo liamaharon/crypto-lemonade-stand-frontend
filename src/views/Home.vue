@@ -2,7 +2,7 @@
   <div class="home">
     <img
       class="img"
-      alt="Vue logo"
+      alt="Project logo"
       src="../assets/logo.png"
     >
     <h1 class="is-size-1">
