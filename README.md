@@ -28,7 +28,7 @@ yarn run lint
 
 ## Introduction
 
-This repo contains the frontend for the Crypto Lemonade Stand project. The associated back-end for the project can be found [here](https://github.com/liamaharon/crypto-lemonade-stand-frontend).
+This repo contains the frontend for the Crypto Lemonade Stand project. The associated back-end for the project can be found [here](https://github.com/liamaharon/crypto-lemonade-stand-backend).
 
 ## Features
 
