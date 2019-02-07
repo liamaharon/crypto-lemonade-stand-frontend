@@ -34,6 +34,7 @@ This repo contains the frontend for the Crypto Lemonade Stand project. The assoc
 
 - [x] Signup
 - [x] Login as admin or regular user
+- [x] Logged in user information is persisted in localstorage
 - [x] Admins can view all orders
 - [x] Admins can update order status (PENDING_PAYMENT -> PENDING_FUFILMENT -> COMPLETED)
 - [x] Admins can update product information
