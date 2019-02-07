@@ -1,19 +1,29 @@
 <template>
-  <orders-admin
-    :orders-with-product="ordersWithProduct"
-    :update-order="updateOrder"
-    :orders-error="ordersError"
-    :orders-updating="ordersUpdating"
-  />
+  <div class="wrapper">
+    <orders-admin
+      class="orders-admin"
+      :orders-with-product="ordersWithProduct"
+      :update-order="updateOrder"
+      :orders-error="ordersError"
+      :orders-updating="ordersUpdating"
+    />
+    <products-admin
+      :products="products"
+      :update-product="updateProduct"
+      :products-updating="products.productsUpdating"
+    />
+  </div>
 </template>
 
 <script>
 import OrdersAdmin from '@/components/OrdersAdmin';
+import ProductsAdmin from '@/components/ProductsAdmin';
 
 export default {
   name: "Admin",
   components: {
-    OrdersAdmin
+    OrdersAdmin,
+    ProductsAdmin
   },
   computed: {
     ordersWithProduct: function() {
@@ -25,6 +35,9 @@ export default {
     ordersError: function() {
       return this.$store.state.orders.error;
     },
+    products: function() {
+      return this.$store.state.products;
+    }
   },
   created: function() {
     this.$store.dispatch("fetchOrders");
@@ -37,13 +50,21 @@ export default {
         if (order.status === 'PENDING_PAYMENT') newOrder.status = 'PENDING_FULFILMENT';
         if (order.status === 'PENDING_FULFILMENT') newOrder.status = 'COMPLETED';
         this.$store.dispatch('updateOrder', {orderId, newOrder});
+    },
+    updateProduct: function(productId, newProduct) {
+        this.$store.dispatch('updateProduct', {productId, newProduct});
     }
   }
 };
 </script>
 
 <style scoped>
-.order {
-  margin-bottom: 1rem;
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.orders-admin {
+  margin-right: 4rem;
 }
 </style>

@@ -44,8 +44,8 @@ export default {
     Order
   },
   props: {
-    ordersWithProduct: Object,
-    ordersError: Object,
+    ordersWithProduct: Array,
+    ordersError: String,
     ordersUpdating: Object,
     updateOrder: Function
   }
