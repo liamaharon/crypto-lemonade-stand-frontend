@@ -8,7 +8,8 @@ export default {
     loggedInUser: {
       email: null,
       authToken: null,
-      id: null
+      id: null,
+      isAdmin: null
     }
   },
   mutations: {
@@ -26,14 +27,16 @@ export default {
       state.loggedInUser = {
         email: null,
         authToken: null,
-        id: null
+        id: null,
+        isAdmin: null
       };
     },
     logout(state) {
       state.loggedInUser = {
         email: null,
         authToken: null,
-        id: null
+        id: null,
+        isAdmin: null
       };
     }
   },
@@ -45,17 +48,24 @@ export default {
         const path = '/accounts/login';
         const { data } = await request({ method, path, data: payload });
         const { userId, id } = data;
+        const roleRes = await request({ method: 'get', path: `/accounts/${userId}/roles`, token: id });
+        const isAdmin = roleRes.data.length > 0 && roleRes.data[0].name === 'admin';
         const user = {
           email: payload.email,
           authToken: id,
-          id: userId
+          id: userId,
+          isAdmin
         };
         window.localStorage.setItem('user', JSON.stringify(user));
         commit('loginSuccess', user);
-        router.push('/admin');
+        if (isAdmin) {
+          router.push('/admin');
+        } else {
+          router.push('/myorders');
+        }
       } catch (err) {
-        let errMsg = err.message;
-        if (err.message.includes('401')) {
+        let errMsg = err.message || err;
+        if (err.message && err.message.includes('401')) {
           errMsg = "Invalid email or password";
         }
         commit('loginFailed', errMsg);
@@ -74,9 +84,9 @@ export default {
         console.error('Error logging out on server: ', err);
       }
     },
-    async recoverUserState({commit}) {
+    async recoverUserState({ commit }) {
       const user = JSON.parse(window.localStorage.getItem('user'));
-      if (user.email) {
+      if (user && user.email) {
         commit('loginSuccess', user);
       }
     }
