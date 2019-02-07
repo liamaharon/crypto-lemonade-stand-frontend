@@ -1,27 +1,17 @@
 <template>
   <div class="box wrapper">
-    <span>
-      Symbol: {{ ticker }}
-    </span> 
-    <span>
-      Amount: {{ qty }}
-    </span>
-    <span>
-      Customer ID: {{ accountId }}
-    </span>
-    <span>
-      Payout address: {{ payoutAddress }}
-    </span>
-    <span>
-      Status: {{ status }}
-    </span>
+    <span>Symbol: {{ ticker }}</span>
+    <span>Amount: {{ qty }}</span>
+    <span>Customer ID: {{ accountId }}</span>
+    <span>Payout address: {{ payoutAddress }}</span>
+    <span>Status: {{ status }}</span>
     <button
       v-if="updateBtnText"
       class="button is-primary"
       :class="{'is-loading': updating}"
       @click="updateOrder"
     >
-      {{ updateBtnText }} 
+      {{ updateBtnText }}
     </button>
   </div>
 </template>
@@ -41,11 +31,11 @@ export default {
   computed: {
     updateBtnText: function() {
       if (!this.updateOrder) return null;
-      if (this.status === 'PENDING_PAYMENT') return 'Mark paid'; 
-      if (this.status === 'PENDING_FULFILMENT') return 'Mark fulfilled'; 
+      if (this.status === "PENDING_PAYMENT") return "Mark paid";
+      if (this.status === "PENDING_FULFILMENT") return "Mark fulfilled";
       return null;
     }
-  }
+  },
 };
 </script>
 
