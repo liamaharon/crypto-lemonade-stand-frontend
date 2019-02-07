@@ -1,5 +1,4 @@
-import request from '../utils/request';
-// import router from '../router';
+import request from '@/utils/request';
 
 export default {
   state: {
