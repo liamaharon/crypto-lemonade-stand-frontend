@@ -4,7 +4,7 @@
 
 ```bash
 git clone https://github.com/liamaharon/crypto-lemonade-stand-frontend.git
-cd crypto-lemondade-frontend
+cd crypto-lemondade-stand-frontend
 yarn install
 ```
 
