@@ -14,7 +14,10 @@ axios.interceptors.response.use(
         router.push('/login?forbiddenMsg=true');
       }
     }
-    return Promise.reject(error.message);
+    let errorMsg = error.message;
+    if (error.response && error.response.data && error.response.data.error && error.response.data.error.message)
+      errorMsg += `: ${error.response.data.error.message}`;
+    return Promise.reject(errorMsg);
   }
 );
 
