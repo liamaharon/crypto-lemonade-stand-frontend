@@ -100,7 +100,7 @@ export default {
           const res = await request({ method, path, token: authToken, data: order });
           commit('createOrderSuccess', res.data);
         } catch (err) {
-          commit('createOrderFailed', `Failed to update order: ${err}`);
+          commit('createOrderFailed', `Failed to create order: ${err}`);
         }
       }, 1000);
     }
