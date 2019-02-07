@@ -5,7 +5,8 @@ export default {
     data: [],
     loading: false,
     error: null,
-    ordersUpdating: {}
+    ordersUpdating: {},
+    creatingOrder: false,
   },
   mutations: {
     initFetchOrders(state) {
@@ -20,6 +21,18 @@ export default {
       state.loading = false;
       state.error = err;
       state.data = [];
+    },
+    initCreateOrder(state) {
+      state.creatingOrder = true;
+    },
+    createOrderSuccess(state, newOrder) {
+      state.creatingOrder = false;
+      state.error = null;
+      state.data = [...state.data, newOrder];
+    },
+    createOrderFailed(state, err) {
+      state.creatingOrder = false;
+      state.error = err;
     },
     initUpdateOrder(state, orderId) {
       state.ordersUpdating = { ...state.ordersUpdating, [orderId]: true };
@@ -73,6 +86,21 @@ export default {
           commit('updateOrderSuccess', { orderId, newOrder: res.data });
         } catch (err) {
           commit('updateOrderFailed', {orderId, err: `Failed to update order: ${err}`});
+        }
+      }, 1000);
+    },
+    async createOrder({ commit, rootState }, order) {
+      commit('initCreateOrder');
+      // simulate some network delay
+      setTimeout(async () => {
+        try {
+          const method = 'post';
+          const {authToken, id} = rootState.auth.loggedInUser;
+          const path = `/accounts/${id}/orders`;
+          const res = await request({ method, path, token: authToken, data: order });
+          commit('createOrderSuccess', res.data);
+        } catch (err) {
+          commit('createOrderFailed', `Failed to update order: ${err}`);
         }
       }, 1000);
     }

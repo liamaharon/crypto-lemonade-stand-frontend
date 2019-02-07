@@ -98,7 +98,7 @@
             </label>
             <div class="control">
               <input
-                v-model="modalForm.payoutAddress"
+                v-model="modalForm.address"
                 class="input"
                 type="text"
                 placeholder="0xd46d765497bce77897293104bd8418fc04521c12"
@@ -107,7 +107,11 @@
           </div>
         </section>
         <footer class="modal-card-foot">
-          <button class="button is-success">
+          <button
+            class="button is-success"
+            :class="{'is-loading': creatingOrder}"
+            @click="createNewOrder"
+          >
             Create order
           </button>
           <button
@@ -136,7 +140,7 @@ export default {
       modalForm: {
         productId: 1,
         qty: 0,
-        payoutAddress: ""
+        address: ""
       }
     };
   },
@@ -150,6 +154,15 @@ export default {
     products: function() {
       return this.$store.state.products;
     },
+    creatingOrder: function() {
+      return this.$store.state.orders.creatingOrder;
+    },
+  },
+  watch: {
+    // when a create order request finishes close the modal
+    creatingOrder: function(next, prev) {
+      if (prev && !next) this.hideModal();
+    }
   },
   created: function() {
     this.$store.dispatch("fetchOrders", this.$store.state.auth.loggedInUser.id);
@@ -165,14 +178,15 @@ export default {
       this.modalForm = {
         productId: 1,
         qty: 0,
-        payoutAddress: ""
+        address: ""
       };
     },
-    newOrder: function() {
+    createNewOrder: function() {
       const order = {
-        ...this.modalForm, status: 'PENDING_PAYMENT' 
+        ...this.modalForm, 
+        status: 'PENDING_PAYMENT' 
       };
-      this.$store.dispatch('newOrder', order);
+      this.$store.dispatch('createOrder', order);
     },
   },
 };
