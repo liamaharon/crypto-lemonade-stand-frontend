@@ -15,9 +15,9 @@
       </span>
       <button
         class="button is-primary"
-        @click="onClickAllOrders()"
+        @click="loggedInUser.isAdmin ? onClickAdmin() : onClickMyOrders()"
       >
-        Admin
+        {{ loggedInUser.isAdmin ? "Admin": "My orders" }}
       </button>
       <button
         class="button"
@@ -41,8 +41,11 @@ export default {
     onClickLogout: function() {
       this.$store.dispatch("logout");
     },
-    onClickAllOrders: function() {
-      this.$router.push('/admin');
+    onClickAdmin: function() {
+      this.$router.push("/admin");
+    },
+    onClickMyOrders: function() {
+      this.$router.push("/myorders");
     }
   }
 };
@@ -58,7 +61,8 @@ export default {
   align-items: baseline;
   margin-left: auto;
 }
-.email, .is-primary {
+.email,
+.is-primary {
   margin-right: 1rem;
 }
 </style>
