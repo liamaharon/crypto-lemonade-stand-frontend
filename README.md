@@ -1,29 +1,41 @@
-# crypto-lemonade-stand-frontend
+# Crypto Lemonade Stand Frontend
 
-## Project setup
-```
+## Setup
+
+```bash
+git clone https://github.com/liamaharon/crypto-lemonade-stand-frontend.git
+cd crypto-lemondade-frontend
 yarn install
 ```
 
-### Compiles and hot-reloads for development
-```
+## Compiles and hot-reloads for development
+
+```bash
 yarn run serve
 ```
 
-### Compiles and minifies for production
-```
+## Compiles and minifies for production
+
+```bash
 yarn run build
 ```
 
-### Run your tests
-```
-yarn run test
-```
+## Lints and fixes files
 
-### Lints and fixes files
-```
+```bash
 yarn run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Introduction
+
+This repo contains the frontend for the Crypto Lemonade Stand project. The associated back-end for the project can be found [here](https://github.com/liamaharon/crypto-lemonade-stand-frontend).
+
+## Features
+
+- [x] Signup
+- [x] Login as admin or regular user
+- [x] Admins can view all orders
+- [x] Admins can update order status (PENDING_PAYMENT -> PENDING_FUFILMENT -> COMPLETED)
+- [x] Admins can update product information
+- [x] Users can view their own orders
+- [x] Users can create new orders
