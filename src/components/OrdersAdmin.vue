@@ -8,9 +8,7 @@
       class="message is-danger"
     >
       <div class="message-body">
-        There was a problem fetching the orders.
-        <br>
-        <span class="login-error-msg">
+        <span>
           {{ ordersError }}
         </span>
       </div>
