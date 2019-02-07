@@ -45,10 +45,15 @@ export default {
   },
   actions: {
     async fetchOrders({ commit, rootState }, accountId) {
-      commit('initFetchOrders', accountId);
+      commit('initFetchOrders');
       try {
         const method = 'get';
-        const path = '/orders';
+        let path;
+        if (accountId) {
+          path = `/accounts/${accountId}/orders`;
+        } else {
+          path = '/orders';
+        }
         const token = rootState.auth.loggedInUser.authToken;
         const res = await request({ method, path, token });
         commit('fetchOrdersSuccess', res.data);

@@ -32,6 +32,12 @@ export default new Router({
         import(/* webpackChunkName: "admin" */ "./views/Admin.vue")
     },
     {
+      path: "/myorders",
+      name: "my-orders",
+      component: () =>
+        import(/* webpackChunkName: "my-orders" */ "./views/MyOrders.vue")
+    },
+    {
       path: "/**",
       name: "404",
       component: () =>

@@ -40,6 +40,7 @@ export default {
   },
   computed: {
     updateBtnText: function() {
+      if (!this.updateOrder) return null;
       if (this.status === 'PENDING_PAYMENT') return 'Mark paid'; 
       if (this.status === 'PENDING_FULFILMENT') return 'Mark fulfilled'; 
       return null;
