@@ -8,7 +8,7 @@
       class="message is-danger"
     >
       <div class="message-body">
-        There was a problem fetching the products.
+        Something went wrong.
         <br>
         <span class="login-error-msg">
           {{ products.error }}

@@ -35,7 +35,7 @@ export default {
       state.productsUpdating = newProductsUpdating;
       state.error = null;
     },
-    updateProductFailed(state, productId, err) {
+    updateProductFailed(state, {productId, err}) {
       const newProductsUpdating = {...state.productsUpdating};
       delete newProductsUpdating[productId];
 
@@ -53,23 +53,23 @@ export default {
         const res = await request({ method, path, token });
         commit('fetchProductsSuccess', res.data);
       } catch (err) {
-        commit('fetchProductsFailed', err);
+        commit('fetchProductsFailed', `Failed to fetch products: ${err}`);
       }
     },
     async updateProduct({ commit, rootState }, {productId, newProduct}) {
       commit('initUpdateProduct', productId);
-      try {
-        const method = 'put';
-        const path = `/products/${productId}`;
-        const token = rootState.auth.loggedInUser.authToken;
-        // simulate some network delay
-        setTimeout(async () => {
+      // simualte network delay
+      setTimeout(async () => {
+        try {
+          const method = 'put';
+          const path = `/products/${productId}`;
+          const token = rootState.auth.loggedInUser.authToken;
           const res = await request({ method, path, token, data: newProduct });
           commit('updateProductSuccess', {productId, newProduct: res.data});
-        }, 1000);
-      } catch (err) {
-        commit('updateProductFailed', err);
-      }
+        } catch (err) {
+          commit('updateProductFailed', {productId, err: `Failed to update product: ${err}`});
+        }
+      }, 1000);
     }
   }
 };

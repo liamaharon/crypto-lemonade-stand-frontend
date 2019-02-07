@@ -110,6 +110,12 @@ export default {
       }
     };
   },
+  watch: {
+    // after a product finishes updating, the modal should close
+    isUpdating: function(next, prev) {
+      if (prev && !next) this.hideModal();
+    }
+  },
   methods: {
     showModal: function() {
       this.modalActive = true;
@@ -131,7 +137,7 @@ export default {
         price: this.price,
         ...this.editForm
       });
-    }
+    },
   }
 };
 </script>
